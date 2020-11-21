@@ -1,0 +1,15 @@
+input, a {
+  text-decoration: none;
+  color: black;
+  border-radius: 15px;
+  background-color: darkkhaki;
+  transform: scale(1.2);
+  padding: 10px 20px;
+  margin: 0 30px;
+  border-width: 0;
+}
+input:hover, a:hover {
+  background-color: olive;
+}
+input:focus {outline:0;
+}
