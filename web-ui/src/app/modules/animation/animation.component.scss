@@ -1,28 +1,22 @@
-.header {
-  text-align: center;
-}
+.animation {
 
-textarea {
-  resize: none;
-  text-align: center;
-}
+  .actions {
+    margin-bottom: 12px;
+    text-align: center;
+  }
 
-.cursor-editor {
-  margin-top: 12px;
-  text-align: center;
-}
+  .music-sheet {
+    text-align: center;
+    width: min-content;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.cursor-nav {
-  margin-bottom: 12px;
-  text-align: center;
-}
-
-.paper {
-  text-align: center;
-  width: min-content;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  .music-editor {
+    margin-top: 12px;
+    text-align: center;
+  }
 }
 
 
