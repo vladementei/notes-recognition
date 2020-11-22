@@ -15,6 +15,25 @@ html {
   background-color: $background-primary-light;
 }
 
+input, a, button.mat-button {
+  text-decoration: none;
+  color: $text-primary-dark;
+  border-radius: 15px;
+  background-color: $input-primary-light;
+  transform: scale(1.2);
+  padding: 10px 20px;
+  margin: 0 30px;
+  border-width: 0;
+}
+
+input:hover, a:hover, button:hover {
+  background-color: $input-hover-primary-light;
+}
+
+input:focus, button:focus {
+  outline: 0;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

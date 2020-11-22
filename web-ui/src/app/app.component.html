@@ -1,15 +1,2 @@
 <h1>Midi converter</h1>
-
-<div class="uploader">
-  <input type="file"
-         accept="image/png, image/jpeg"
-         (change)="previewFile($event.target.files[0])"
-  >
-  <button mat-button (click)="uploadImage()">Upload image</button>
-  <div class="image-preview">
-    <img [src]="imageSrc" alt="No image selected...">
-  </div>
-</div>
-
-<!--<a href="{{ url_for('animation') }}">Show animation</a>-->
 <router-outlet></router-outlet>

@@ -1,0 +1,14 @@
+@import "src/assets/themes/styles.scss";
+
+.uploading {
+  margin-bottom: 20px;
+
+  .image-preview {
+    margin-top: 30px;
+
+    img {
+      max-height: 600px;
+    }
+  }
+}
+
