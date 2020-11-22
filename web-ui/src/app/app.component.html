@@ -1,18 +1,15 @@
 <h1>Midi converter</h1>
 
-<form action="" style="margin-bottom: 20px" method="post" enctype="multipart/form-data">
+<div class="uploader">
   <input type="file"
          accept="image/png, image/jpeg"
          (change)="previewFile($event.target.files[0])"
   >
   <button mat-button (click)="uploadImage()">Upload image</button>
-  <div style="margin-top: 30px">
-    <img [src]="imageSrc" style="max-height: 600px" alt="No image selected...">
+  <div class="image-preview">
+    <img [src]="imageSrc" alt="No image selected...">
   </div>
+</div>
 
-</form>
 <!--<a href="{{ url_for('animation') }}">Show animation</a>-->
-<div id="paper"></div>
-
-
 <router-outlet></router-outlet>

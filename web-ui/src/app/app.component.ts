@@ -9,7 +9,7 @@ import {RestService} from './core/services/rest-service.service';
 export class AppComponent {
 
   imageSrc: string;
-  selectedFile: File;
+  private selectedFile: File;
 
   constructor(private restService: RestService) {
   }
@@ -25,7 +25,7 @@ export class AppComponent {
     this.selectedFile = file;
   }
 
-  uploadImage() {
+  uploadImage(): void {
     this.restService.sendImage(this.selectedFile).subscribe();
   }
 }
