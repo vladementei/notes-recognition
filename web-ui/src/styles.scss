@@ -1,13 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "assets/themes/styles";
+
+html, body {
+  height: 100vh;
+  overflow-y: hidden;
+}
 
 body {
   text-align: center;
 }
 
 html {
-  background-color: cornsilk;
+  background-color: $background-primary-light;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-primary-light;
+  margin: 20px 0;
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover {
+  background: $background-primary-dark;
+  border-radius: 10px;
+}
+
+
+.d-flex {
+  display: flex;
 }
 
