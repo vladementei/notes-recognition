@@ -11,21 +11,23 @@ import abcjs from 'abcjs';
 export class AnimationComponent extends RxUnsubscribe implements OnInit {
 
   @ViewChild('musicSheet') musicSheet;
+  musicSheetWidth = 700;
   musicEditor;
   isAnimationWorks: boolean = undefined;
   music: string;
+
 
   constructor(private cdr: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit(): void {
-    this.music = 'G4 c4 d2 d2 d2 B2 A4 A4 A4 d4 |\n' +
-      ' d2 e2 e2 c2 B4 G4 B4 e4 e2 f2 e2 e2 |\n' +
-      ' B4 G2 G2 d2 B4 c4 |\n' +
-      ' c4 c2 d2 c2 B2 A4 A4 A4 d4 |\n' +
-      ' d2 e2 d2 c2 B2 G2 B2 e4 e2 f2 e2 d2 |\n' +
-      ' d4 A4 G2 G2 A4 d2 B4 c4 |';
+    this.music = 'G4 c4 d2 d2 d2 B2 A4 A4 A4 d4' +
+      ' d2 e2 e2 c2 B4 G4 B4 e4 e2 f2 e2 e2' +
+      ' B4 G2 G2 d2 B4 c4' +
+      ' c4 c2 d2 c2 B2 A4 A4 A4 d4' +
+      ' d2 e2 d2 c2 B2 G2 B2 e4 e2 f2 e2 d2' +
+      ' d4 A4 G2 G2 A4 d2 B4 c4';
     this.cdr.detectChanges();
 
     this.musicEditor = new abcjs.Editor(
@@ -33,10 +35,14 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
         paper_id: 'musicSheet',
         warnings_id: 'warnings',
         abcjsParams: {
-          add_classes: true
+          add_classes: true,
+          staffwidth: 80000,
         }
       }
     );
+
+    this.musicSheetWidth = this.getMusicSheetWidth();
+    this.cdr.detectChanges();
   }
 
   animate(): void {
@@ -49,5 +55,15 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   pause(): void {
     abcjs.pauseAnimation(this.isAnimationWorks);
     this.isAnimationWorks = !this.isAnimationWorks;
+  }
+
+  getMusicSheetWidth(): number {
+    return Math.floor((this.musicSheet?.nativeElement?.firstChild?.lastChild?.x?.baseVal?.value || this.musicSheetWidth) + 40);
+  }
+
+  onMusicChange() {
+    this.cdr.detectChanges();
+    this.musicSheetWidth = this.getMusicSheetWidth();
+    this.cdr.detectChanges();
   }
 }
