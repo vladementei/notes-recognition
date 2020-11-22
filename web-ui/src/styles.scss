@@ -34,6 +34,10 @@ input:focus, button:focus {
   outline: 0;
 }
 
+.abcjs-cursor.cursor {
+  background-color: $cursor-primary-light;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
