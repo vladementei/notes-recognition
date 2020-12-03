@@ -15,6 +15,7 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   musicEditor;
   isAnimationWorks: boolean = undefined;
   music: string;
+  cursorScroller: number;
   isMobileView: boolean = false;
 
 
@@ -53,6 +54,7 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   }
 
   animate(): void {
+    this.stopCursorScroller();
     const params = {showCursor: true};
     const sheet = this.musicSheet.nativeElement;
     abcjs.startAnimation(sheet, this.musicEditor.tunes[0], params);
@@ -60,16 +62,21 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
 
     if (this.isMobileView) {
       const cursor = document.getElementsByClassName('abcjs-cursor cursor')[0];
-      const int = window.setInterval(function() {
-        cursor.scrollIntoView({behavior: 'smooth', inline: "start"})
-      }, 1000);
-      //setTimeout(() => clearInterval(int), 10000);
+      this.cursorScroller = window.setInterval(() => cursor.scrollIntoView({behavior: 'smooth', inline: "center"}), 500);
     }
   }
 
   pause(): void {
+    this.stopCursorScroller();
     abcjs.pauseAnimation(this.isAnimationWorks);
     this.isAnimationWorks = !this.isAnimationWorks;
+  }
+
+  stopCursorScroller(): void {
+    if (this.cursorScroller) {
+      clearInterval(this.cursorScroller);
+      this.cursorScroller = null;
+    }
   }
 
   updateMusicSheetWidth(): void {
