@@ -1,8 +1,34 @@
-.animation {
+@import "src/assets/themes/styles.scss";
 
+.animation {
   .actions {
-    margin-bottom: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
     text-align: center;
+    display: flex;
+
+    .action-wrapper {
+      width: 40px;
+      padding: 8px 8px 8px 10px;
+      border-radius: 10px;
+      border: 1.5px solid;
+      display: flex;
+      cursor: pointer;
+
+      .control-button {
+        height: 20px;
+        margin: 0 auto;
+      }
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      &:hover {
+        background-color: $input-hover-primary-light;
+      }
+    }
   }
 
   .music-sheet-wrapper {

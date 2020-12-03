@@ -3,12 +3,17 @@
     <h1>Animation</h1>
   </div>
   <div class="actions">
-    <button mat-button (click)="animate()">Animate</button>
-    <button mat-button
-            *ngIf="isAnimationWorks !== undefined"
-            (click)="pause()">
-      {{isAnimationWorks ? 'Pause' : 'Resume'}}
-    </button>
+    <div class="action-wrapper" (click)="animate()">
+      <img class="control-button"
+           src="assets/img/play-begin.svg" alt="Animate">
+    </div>
+    <div *ngIf="isAnimationWorks !== undefined"
+         (click)="pause()"
+         class="action-wrapper">
+      <img class="control-button"
+           [src]="'assets/img/' + (isAnimationWorks ? 'pause' : 'play') + '.svg'"
+           [alt]="isAnimationWorks ? 'Pause' : 'Resume'">
+    </div>
   </div>
   <div class="music-sheet-wrapper">
     <div #musicSheet id="musicSheet" class="music-sheet"></div>
