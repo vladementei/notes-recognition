@@ -5,6 +5,10 @@
     text-align: center;
   }
 
+  .music-sheet-wrapper {
+    overflow-x: auto;
+  }
+
   .music-sheet {
     text-align: center;
     width: min-content;

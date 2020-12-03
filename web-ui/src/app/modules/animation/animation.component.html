@@ -10,12 +10,12 @@
       {{isAnimationWorks ? 'Pause' : 'Resume'}}
     </button>
   </div>
-  <div #musicSheet
-       [ngStyle]="{'max-width.px': this.musicSheetWidth}"
-       id="musicSheet" class="music-sheet"></div>
+  <div class="music-sheet-wrapper">
+    <div #musicSheet id="musicSheet" class="music-sheet"></div>
+  </div>
   <div class="music-editor">
-    	<textarea name='abc' id='abc' cols="80" rows="8"
-                (keydown)="onMusicChange()">
+    	<textarea name="musicInput" id="musicInput" cols="80" rows="8"
+                (keydown)="isMobileView ? onMusicChange() : null">
         {{this.music}}
       </textarea>
 <!--    <div>-->
