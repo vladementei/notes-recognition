@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {RxUnsubscribe} from '../../core/services/rx-unsubscribe';
 import abcjs from 'abcjs';
+import * as midiParser from 'midi-parser-js';
 
 @Component({
   selector: 'animation',
@@ -17,6 +18,7 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   music: string;
   cursorScroller: number;
   isMobileView: boolean = false;
+  private selectedMidiFile: File;
 
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -51,6 +53,18 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
     }
 
     this.cdr.detectChanges();
+  }
+
+  uploadMidi(file: File): void {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (() => {
+        const midiArray = midiParser.parse(reader.result);
+        console.log(midiArray);
+      });
+      reader.readAsDataURL(file);
+    }
+    this.selectedMidiFile = file;
   }
 
   animate(): void {
