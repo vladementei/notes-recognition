@@ -4,9 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-top: 20px;
   width: 80%;
-  margin-top: 18vh;
 
   &-link {
     padding: 30px;
@@ -48,8 +46,5 @@
 }
 
 .page-limiter {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0;
-  padding: 0 10px;
+  margin: auto;
 }

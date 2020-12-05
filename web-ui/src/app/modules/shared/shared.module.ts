@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -14,9 +16,14 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     MatButtonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    HeaderComponent,
+    FooterComponent,
   ],
-  declarations: [],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+  ],
   providers: [],
 })
 export class SharedModule {

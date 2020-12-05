@@ -5,6 +5,7 @@
 html, body {
   height: 100vh;
   overflow-y: hidden;
+  margin: 0;
 }
 
 body {
@@ -62,3 +63,12 @@ textarea {
   display: flex;
 }
 
+
+.content-wrapper {
+  height: calc(100% - 100px);
+
+  main, uploading, animation {
+    display: flex;
+    height: 100%;
+  }
+}
