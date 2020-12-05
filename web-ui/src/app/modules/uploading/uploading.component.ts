@@ -12,7 +12,7 @@ import {takeUntil} from 'rxjs/operators';
 export class UploadingComponent extends RxUnsubscribe {
 
   imageSrc: string;
-  private selectedFile: File;
+  selectedFile: File;
 
   constructor(private restService: RestService,
               private cdr: ChangeDetectorRef) {
@@ -20,6 +20,7 @@ export class UploadingComponent extends RxUnsubscribe {
   }
 
   previewFile(file: File): void {
+    this.imageSrc = null;
     if (file) {
       const reader = new FileReader();
       reader.onload = (() => {
