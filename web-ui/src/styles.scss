@@ -70,5 +70,6 @@ textarea {
   main, uploading, animation {
     display: flex;
     height: 100%;
+    overflow-y: auto;
   }
 }

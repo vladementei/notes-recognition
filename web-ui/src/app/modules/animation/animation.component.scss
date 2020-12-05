@@ -1,6 +1,10 @@
 @import "src/assets/themes/styles.scss";
 
 .animation {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+
   .actions {
     margin-left: auto;
     margin-right: auto;
@@ -44,8 +48,12 @@
   }
 
   .music-editor {
-    margin-top: 12px;
     text-align: center;
+
+    textarea {
+      visibility: hidden; //comment this line in case you need to see editor
+      height: 0; //comment this line in case you need to see editor
+    }
   }
 }
 
