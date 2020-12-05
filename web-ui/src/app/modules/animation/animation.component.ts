@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild
 import {RxUnsubscribe} from '../../core/services/rx-unsubscribe';
 import abcjs from 'abcjs';
 import * as midiParser from 'midi-parser-js';
+import * as soundFont from 'soundfont-player';
 
 @Component({
   selector: 'animation',
@@ -14,6 +15,7 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   @ViewChild('musicSheet') musicSheet;
   musicSheetWidth = 700;
   musicEditor;
+  timingCallbacks;
   isAnimationWorks: boolean = undefined;
   music: string;
   cursorScroller: number;
@@ -69,9 +71,27 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
 
   animate(): void {
     this.stopCursorScroller();
+    if (this.timingCallbacks) {
+      this.timingCallbacks.stop();
+    }
     const params = {showCursor: true};
     const sheet = this.musicSheet.nativeElement;
+    const audioContext = new AudioContext();
+    this.timingCallbacks = new abcjs.TimingCallbacks(this.musicEditor.tunes[0], {
+      eventCallback: (midiEvent) => {
+        if (midiEvent) {
+          const note = this.music.slice(midiEvent.startChar, midiEvent?.endChar)?.trim();
+          if (note) {
+            console.log(note);
+            soundFont.instrument(audioContext, 'acoustic_guitar_nylon').then((piano) => {
+              piano.play(note);
+            });
+          }
+        }
+      }
+    });
     abcjs.startAnimation(sheet, this.musicEditor.tunes[0], params);
+    this.timingCallbacks.start();
     this.isAnimationWorks = true;
 
     if (this.isMobileView) {
@@ -83,6 +103,7 @@ export class AnimationComponent extends RxUnsubscribe implements OnInit {
   pause(): void {
     this.stopCursorScroller();
     abcjs.pauseAnimation(this.isAnimationWorks);
+    this.isAnimationWorks ? this.timingCallbacks.pause() : this.timingCallbacks.start();
     this.isAnimationWorks = !this.isAnimationWorks;
   }
 

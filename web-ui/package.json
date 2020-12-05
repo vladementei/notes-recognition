@@ -25,6 +25,7 @@
     "abcjs": "^5.12.0",
     "midi-parser-js": "^4.0.4",
     "rxjs": "~6.5.5",
+    "soundfont-player": "^0.12.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
