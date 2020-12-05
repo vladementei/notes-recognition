@@ -3,4 +3,11 @@
 .footer {
   background-color: $background-primary-dark;
   height: 50px;
+  display: flex;
+
+  .corporation {
+    color: $text-primary-light;
+    font-size: 16px;
+    margin: auto;
+  }
 }

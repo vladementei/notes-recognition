@@ -2,5 +2,19 @@
 
 .header {
   background-color: $background-primary-dark;
+  display: flex;
   height: 50px;
+  justify-content: space-between;
+
+  .logo {
+    height: 40px;
+    margin: auto 30px;
+    cursor: pointer;
+  }
+
+  .user {
+    font-size: 40px;
+    margin: auto 20px;
+    cursor: pointer;
+  }
 }
