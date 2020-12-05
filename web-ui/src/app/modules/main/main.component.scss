@@ -23,7 +23,7 @@
 
     &:hover {
       cursor: pointer;
-      box-shadow: 0 0 0 2px $background-primary-dark;
+      box-shadow: 0 0 0 5px $background-primary-dark;
       text-decoration: none;
       color: $text-primary-dark;
     }
@@ -41,7 +41,7 @@
   }
 
   .opacity {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 

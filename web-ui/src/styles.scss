@@ -10,6 +10,8 @@ html, body {
 
 body {
   text-align: center;
+  background-image: url("./assets/img/background.jpg");
+  background-size: cover;
 }
 
 html {
@@ -49,12 +51,12 @@ textarea {
 }
 
 ::-webkit-scrollbar-track {
-  background: $background-primary-light;
+ // background: $background-primary-dark;
   margin: 20px 0;
 }
 
 ::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb:hover {
-  background: $background-primary-dark;
+  background: $background-primary-light;
   border-radius: 10px;
 }
 
@@ -71,5 +73,7 @@ textarea {
     display: flex;
     height: 100%;
     overflow-y: auto;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
