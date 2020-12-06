@@ -4,6 +4,7 @@
 !pip install keras==2.1.5
 !pip install imageai --upgrade
 !pip install -U Flask
+!pip install -U flask-cors
 !pip install flask-ngrok
 !pip install midiutil
 import sys
@@ -17,6 +18,7 @@ import cv2
 from flask_ngrok import run_with_ngrok
 import os
 from flask import Flask, request, redirect, url_for, send_from_directory, send_file,  render_template
+from flask_cors import CORS, cross_origin
 from imageai.Detection.Custom import CustomObjectDetection
 from image_modifier import warp_image
 from convert_utils_1 import convert_song, convert_midi #, convert_midi_to_text
@@ -36,7 +38,8 @@ template_dir = '/content/drive/My Drive/Colab Notebooks/templates/'
 static_dir = '/content/drive/My Drive/Colab Notebooks/static/'
 
 app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Message = namedtuple('Message', 'text')
 # messages = []
@@ -47,6 +50,7 @@ def allowed_file(filename):
     return filename[-3:].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
+@cross_origin()
 def upload_file():
     if request.method == 'POST':
         img_notes = request.files['file']
