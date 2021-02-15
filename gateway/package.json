@@ -2,9 +2,9 @@
   "name": "gateway",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon index.ts",
+    "start": "nodemon src/index.ts",
     "build": "tsc --project ./"
   },
   "keywords": [],
