@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import log4js from "log4js";
 import bodyParser from "body-parser";
 import {Request, Response, NextFunction} from "express-serve-static-core";
 import * as appRouters from "./routers"
@@ -10,6 +11,8 @@ class AppRoutes {
 }
 
 dotenv.config();
+const logger = log4js.getLogger();
+logger.level = process.env.LOG_LEVEL || "error";
 
 const app = express(),
     port = process.env.PORT || 3000;
@@ -35,5 +38,5 @@ app.get(AppRoutes.ROOT, (req, res) => res.send('Notes recognition gateway!'));
 routers.forEach(router => app.use(AppRoutes.ROOT + router.url, router.middleware));
 
 app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+    logger.info(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
