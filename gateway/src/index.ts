@@ -1,10 +1,12 @@
 import dotenv from "dotenv";
 import log4js from "log4js";
 import bodyParser from "body-parser";
-import {Request, Response, NextFunction} from "express-serve-static-core";
+import {Request, Response} from "express-serve-static-core";
 import * as appRouters from "./routers"
-import {createExpressServer} from 'routing-controllers';
+import {useExpressServer} from 'routing-controllers';
 import {ConverterController} from "./controller";
+import express, {Express} from "express";
+import httpContext from "express-http-context";
 
 class AppRoutes {
     public static readonly ROOT = "/";
@@ -15,27 +17,27 @@ dotenv.config();
 const logger = log4js.getLogger();
 logger.level = process.env.LOG_LEVEL || "error";
 
-const app = createExpressServer({
-    controllers: [ConverterController],
+const app: Express = express();
+app.use(httpContext.middleware);
+useExpressServer(app, {
+    controllers: [ConverterController]
 });
+
 const port = process.env.PORT || 3000;
 
-const allowCrossDomain = (req: Request, res: Response, next: NextFunction) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    next();
-};
+// const routers = [
+//     {
+//         url: AppRoutes.CONVERTER,
+//         middleware: appRouters.converterRouter
+//     }
+// ];
 
-const routers = [
-    {
-        url: AppRoutes.CONVERTER,
-        middleware: appRouters.converterRouter
-    }
-];
-
-app.use(allowCrossDomain);
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+    httpContext.ns.bindEmitter(req);
+    httpContext.ns.bindEmitter(res);
+    next();
+});
 
 app.get(AppRoutes.ROOT, (req: Request, res: Response) => res.send('Notes recognition gateway!'));
 //routers.forEach(router => app.use(AppRoutes.ROOT + router.url, router.middleware));
