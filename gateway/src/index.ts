@@ -7,6 +7,7 @@ import {useExpressServer} from 'routing-controllers';
 import {ConverterController} from "./controller";
 import express, {Express} from "express";
 import httpContext from "express-http-context";
+import {GlobalErrorHandler} from "./middleware";
 
 class AppRoutes {
     public static readonly ROOT = "/";
@@ -20,7 +21,9 @@ logger.level = process.env.LOG_LEVEL || "error";
 const app: Express = express();
 app.use(httpContext.middleware);
 useExpressServer(app, {
-    controllers: [ConverterController]
+    controllers: [ConverterController],
+    middlewares: [GlobalErrorHandler],
+    defaultErrorHandler: false
 });
 
 const port = process.env.PORT || 3000;
