@@ -1,4 +1,5 @@
 import express from "express";
+import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import {Request, Response, NextFunction} from "express-serve-static-core";
 import * as appRouters from "./routers"
@@ -8,8 +9,10 @@ class AppRoutes {
     public static readonly CONVERTER = "converter"
 }
 
+dotenv.config();
+
 const app = express(),
-    port = process.env.NODEJS_PORT || 8080;
+    port = process.env.PORT || 3000;
 
 const allowCrossDomain = (req: Request, res: Response, next: NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
