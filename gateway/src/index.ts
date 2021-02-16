@@ -1,9 +1,10 @@
-import express from "express";
 import dotenv from "dotenv";
 import log4js from "log4js";
 import bodyParser from "body-parser";
 import {Request, Response, NextFunction} from "express-serve-static-core";
 import * as appRouters from "./routers"
+import {createExpressServer} from 'routing-controllers';
+import {ConverterController} from "./controller";
 
 class AppRoutes {
     public static readonly ROOT = "/";
@@ -14,8 +15,10 @@ dotenv.config();
 const logger = log4js.getLogger();
 logger.level = process.env.LOG_LEVEL || "error";
 
-const app = express(),
-    port = process.env.PORT || 3000;
+const app = createExpressServer({
+    controllers: [ConverterController],
+});
+const port = process.env.PORT || 3000;
 
 const allowCrossDomain = (req: Request, res: Response, next: NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -34,8 +37,8 @@ const routers = [
 app.use(allowCrossDomain);
 app.use(bodyParser.json())
 
-app.get(AppRoutes.ROOT, (req, res) => res.send('Notes recognition gateway!'));
-routers.forEach(router => app.use(AppRoutes.ROOT + router.url, router.middleware));
+app.get(AppRoutes.ROOT, (req: Request, res: Response) => res.send('Notes recognition gateway!'));
+//routers.forEach(router => app.use(AppRoutes.ROOT + router.url, router.middleware));
 
 app.listen(port, () => {
     logger.info(`⚡️[server]: Server is running at http://localhost:${port}`);
