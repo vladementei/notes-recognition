@@ -1,13 +1,12 @@
-import {Action, Body, Controller, Get, OnUndefined, Param, Post, UseBefore, UseInterceptor} from "routing-controllers"
+import {Body, Controller, Get, OnUndefined, Param, Post, UseBefore} from "routing-controllers"
 import "reflect-metadata";
 import {removeCors} from "../middleware";
-import httpContext from "express-http-context";
 import {Song} from "../model";
 
 @Controller()
 @UseBefore(removeCors)
 // @UseInterceptor((action: Action, content: any) => {
-//     return content + httpContext.get('project');
+//     return httpContext.get('project');
 // })
 export class ConverterController {
     @Get("/converter/:id")

@@ -8,6 +8,8 @@ import {ConverterController} from "./controller";
 import express, {Express} from "express";
 import httpContext from "express-http-context";
 import {GlobalErrorHandler} from "./middleware";
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from '../src/swagger/openapi.json';
 
 class AppRoutes {
     public static readonly ROOT = "/";
@@ -19,7 +21,10 @@ const logger = log4js.getLogger();
 logger.level = process.env.LOG_LEVEL || "error";
 
 const app: Express = express();
+app.use(bodyParser.json())
 app.use(httpContext.middleware);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 useExpressServer(app, {
     controllers: [ConverterController],
     middlewares: [GlobalErrorHandler],
@@ -35,7 +40,6 @@ const port = process.env.PORT || 3000;
 //     }
 // ];
 
-app.use(bodyParser.json())
 app.use((req, res, next) => {
     httpContext.ns.bindEmitter(req);
     httpContext.ns.bindEmitter(res);

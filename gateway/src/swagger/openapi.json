@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Gateway API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Converter API functions",
+      "description": "Converter API functions of Notes recognition"
+    }
+  ],
+  "paths": {
+    "/converter/{id}": {
+      "get": {
+        "summary": "Return simple string",
+        "tags": [
+          "Converter API functions"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "simple parameter",
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "description": "parameter id just for test",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "document": {
+                "schema": {
+                  "type": "string",
+                  "example": "some text"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "returns simple answer from post",
+        "tags": [
+          "Converter API functions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Song"
+              },
+              "example": {
+                "length": "string"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "simple parameter",
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "description": "parameter id just for test",
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Song": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

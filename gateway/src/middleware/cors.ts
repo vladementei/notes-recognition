@@ -1,11 +1,10 @@
 import log4js from "log4js";
-import httpContext from "express-http-context";
 
 const logger = log4js.getLogger();
 
 export const removeCors = (request: any, response: any, next?: (err?: any) => any): any => {
     logger.info(request.url);
-    httpContext.set('project', 'Notes recognition');
+    //httpContext.set('project', 'Notes recognition');
     response.header("Access-Control-Allow-Origin", "*");
     response.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
     response.header("Access-Control-Allow-Headers", "Content-Type");
