@@ -2,6 +2,12 @@ import {Body, Controller, Get, OnUndefined, Param, Post, UseBefore} from "routin
 import "reflect-metadata";
 import {removeCors} from "../middleware";
 import {Song} from "../model";
+import {AppRoutes} from "../constants";
+import {converter} from "../mocks";
+
+class ConverterRoutes {
+    public static readonly ID = "id";
+}
 
 @Controller()
 @UseBefore(removeCors)
@@ -9,14 +15,14 @@ import {Song} from "../model";
 //     return httpContext.get('project');
 // })
 export class ConverterController {
-    @Get("/converter/:id")
-    getOne(@Param("id") id: number) {
-        return 'This action returns #' + id;
+    @Get(`${AppRoutes.CONVERTER}/:${ConverterRoutes.ID}`)
+    getOne(@Param(ConverterRoutes.ID) id: number) {
+        return converter;
     }
 
-    @Post('/converter/:id')
+    @Post(`${AppRoutes.CONVERTER}/:${ConverterRoutes.ID}`)
     @OnUndefined(204)
-    postOne(@Param('id') id: number, @Body() song: Song) {
+    postOne(@Param(ConverterRoutes.ID) id: number, @Body() song: Song) {
         console.log(JSON.stringify(song));
         return undefined;
     }
