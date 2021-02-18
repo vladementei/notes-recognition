@@ -48,40 +48,35 @@
             }
           }
         }
-      },
+      }
+    },
+    "/converter/notes": {
       "post": {
-        "summary": "returns simple answer from post",
+        "summary": "Converts MIDI file to notes",
         "tags": [
           "Converter API functions"
         ],
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Song"
-              },
-              "example": {
-                "length": "string"
+                "required": "true",
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "required": "true",
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
               }
             }
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "simple parameter",
-            "schema": {
-              "type": "string",
-              "example": "1"
-            }
-          }
-        ],
-        "description": "parameter id just for test",
+        "description": "desc",
         "responses": {
-          "204": {
+          "200": {
             "description": "OK"
           }
         }

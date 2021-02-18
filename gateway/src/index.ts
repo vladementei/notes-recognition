@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import log4js from "log4js";
 import bodyParser from "body-parser";
+import fileUpload from "express-fileupload";
 import {Request, Response} from "express-serve-static-core";
 import {useExpressServer} from 'routing-controllers';
 import {ConverterController} from "./controller";
@@ -18,7 +19,8 @@ logger.level = process.env.LOG_LEVEL || "error";
 const port = process.env.PORT || 3000;
 
 const app: Express = express();
-app.use(bodyParser.json())
+app.use(fileUpload({createParentPath: true}));
+app.use(bodyParser.json());
 app.use(httpContext.middleware);
 swaggerDocument.servers[0].url = process.env.URL + ":" + port;
 app.use(AppRoutes.API_DOCS, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
