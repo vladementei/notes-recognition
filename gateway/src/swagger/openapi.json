@@ -81,6 +81,29 @@
           }
         }
       }
+    },
+    "/converter/midi": {
+      "post": {
+        "summary": "Converts midi notes to MIDI file",
+        "tags": [
+          "Converter API functions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

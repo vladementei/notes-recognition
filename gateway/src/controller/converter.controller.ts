@@ -1,4 +1,4 @@
-import {Controller, Get, HttpError, Param, Post, Req, Res, UseBefore} from "routing-controllers"
+import {Body, Controller, Get, HttpError, Param, Post, Req, Res, UseBefore} from "routing-controllers"
 import "reflect-metadata";
 import axios from "axios";
 import {removeCors} from "../middleware";
@@ -10,6 +10,7 @@ import {UploadedFile} from "express-fileupload";
 class ConverterRoutes {
     public static readonly ID = "id";
     public static readonly NOTES = "notes";
+    public static readonly MIDI = "midi";
 }
 
 class AudioServerError extends HttpError {
@@ -59,4 +60,15 @@ export class ConverterController {
             })
         });
     }
+
+    @Post(`${AppRoutes.CONVERTER}/${ConverterRoutes.MIDI}`)
+    midiFromNotes(@Body() notes: string) {
+        return new Promise((resolve, reject) => {
+            resolve(axios.post(`http://localhost:8081/midi/midi`, notes)
+                .then(response => response.data)
+                .catch(({response}) => {
+                    throw new AudioServerError(response.data.error);
+                }));
+        })
+    };
 }
