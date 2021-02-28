@@ -8,12 +8,19 @@ import express, {Express} from "express";
 import httpContext from "express-http-context";
 import {GlobalErrorHandler} from "./middleware";
 import {AppRoutes} from "./constants";
-
+const keypair = require("keypair");
+const fs = require("fs");
 
 dotenv.config();
 const logger = log4js.getLogger();
 logger.level = process.env.LOG_LEVEL || "error";
 const port = process.env.PORT || 3000;
+if (process.env.UPDATE_KEY === "true") {
+    const rsaPair = keypair();
+    console.log(rsaPair);
+    fs.writeFile("assets/private.key", rsaPair.private, () => {});
+    fs.writeFile("assets/public.key", rsaPair.public, () => {});
+}
 
 const app: Express = express();
 app.use(bodyParser.json())
