@@ -12,8 +12,8 @@ class AuthorizationRoutes {
 }
 
 const signOptions: SignOptions = {
-    issuer: "Otvinta corp",
-    subject: "otvinta@gmail.com",
+    issuer: "GuidoCode corp",
+    subject: "GuidoCode@gmail.com",
     audience: "http://localhost",
     expiresIn: "24h",
     algorithm: "RS256"
