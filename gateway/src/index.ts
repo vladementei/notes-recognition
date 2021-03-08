@@ -19,6 +19,12 @@ logger.level = process.env.LOG_LEVEL || "error";
 const port = process.env.PORT || 3000;
 
 const app: Express = express();
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', '*');
+    next();
+});
 app.use(fileUpload({createParentPath: true}));
 app.use(bodyParser.json());
 app.use(httpContext.middleware);
