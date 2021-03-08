@@ -65,8 +65,17 @@ export class AuthorizationController {
 
     @Post(`${AppRoutes.AUTHORIZATION}/${AuthorizationRoutes.SIGN_UP}`)
     signUp(@Body() user: User) {
-        console.log(user);
-        return user;
+        return new Promise((resolve, reject) => {
+            resolve(axios.post(`http://localhost:3000/users`, {...user, role: "user"})
+                .then(response => {
+                    if (response.status === 201) {
+                        return this.generateToken(response.data);
+                    } else {
+                        throw new HttpError(404, "Sign-up failed");
+                    }
+                })
+            );
+        });
     }
 
     private generateToken(payload: object): Promise<unknown> {
