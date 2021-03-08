@@ -13,6 +13,7 @@ class AuthorizationRoutes {
     public static readonly PUBLIC_KEY = "public-key";
     public static readonly TOKEN = "token";
     public static readonly LOGIN = "login";
+    public static readonly SIGN_UP = "sign-up";
 }
 
 const signOptions: SignOptions = {
@@ -60,6 +61,12 @@ export class AuthorizationController {
                 })
             );
         });
+    }
+
+    @Post(`${AppRoutes.AUTHORIZATION}/${AuthorizationRoutes.SIGN_UP}`)
+    signUp(@Body() user: User) {
+        console.log(user);
+        return user;
     }
 
     private generateToken(payload: object): Promise<unknown> {
